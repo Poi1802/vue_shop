@@ -3,10 +3,12 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-
-import './assets/main.css'
+import axios from 'axios'
 
 const app = createApp(App)
+
+app.config.globalProperties.axios = axios;
+app.config.globalProperties.apiUrl = 'http://localhost:8888';
 
 app.use(createPinia())
 app.use(router)
