@@ -15,19 +15,24 @@
 				<div class="products-grid-one__badge-box">
 					<span class="bg_base badge new">New</span>
 				</div>
-				<a href="cart.html" class="addcart btn--primary style2"> Add To Cart </a>
+				<a href="cart.html" class="addcart btn--primary style2"> В корзину </a>
 				<div class="products-grid__usefull-links">
 					<ul>
 						<li>
-							<a href="wishlist.html" class="">
+							<a
+								@click.prevent="wishStore.addWish(product)"
+								href="#"
+								:class="{
+									activeWish: wishStore.wishes.some(({ id }) => id === product.id),
+								}">
 								<i class="flaticon-heart"> </i>
-								<span> wishlist</span>
+								<span>избранное</span>
 							</a>
 						</li>
 						<li>
 							<a :href="`#popup${product.id}`" class="popup_link">
 								<i class="flaticon-visibility"></i>
-								<span> quick view</span>
+								<span>просмотреть</span>
 							</a>
 						</li>
 					</ul>
@@ -113,7 +118,7 @@
 												<i class="flaticon-plus"></i>
 											</span>
 										</div>
-										<button class="btn--primary">Add to Cart</button>
+										<button class="btn--primary">В корзину</button>
 									</div>
 								</div>
 								<div class="payment-method">
@@ -136,7 +141,7 @@
 				</div>
 			</div>
 			<div class="products-three-single-content text-center">
-				<span>Men Shoes</span>
+				<span>{{ product.category.title }}</span>
 				<h5>
 					<a href="shop-details-3.html"> {{ product.title }} {{ product.id }} </a>
 				</h5>
@@ -147,6 +152,8 @@
 </template>
 
 <script>
+import { useWishListStore } from '../../stores/wishList';
+
 export default {
 	props: {
 		product: {
@@ -157,6 +164,7 @@ export default {
 	data: () => ({
 		qty: 1,
 		selectedColor: null,
+		wishStore: useWishListStore(),
 	}),
 	methods: {
 		addQty() {
