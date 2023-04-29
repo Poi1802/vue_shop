@@ -9,63 +9,34 @@
       <h4>Select Categories</h4>
       <div class="checkbox-item">
         <form>
-          <div class="form-group"> <input type="checkbox" id="bedroom"> <label for="bedroom">Bedroom</label>
+          <div v-for="category in categories" :key="category.id" @click="clickCategory(category.id)" class="form-group">
+            <input type="checkbox" :checked="checkedCategories.includes(category.id)"> <label :for="category.title">{{
+              category.title }}</label>
           </div>
-          <div class="form-group"> <input type="checkbox" id="decoration"> <label for="decoration">Decoration</label>
-          </div>
-          <div class="form-group"> <input type="checkbox" id="kitchen"> <label for="kitchen">Kitchen</label>
-          </div>
-          <div class="form-group"> <input type="checkbox" id="clothing"> <label for="clothing">Clothing</label> </div>
-          <div class="form-group"> <input type="checkbox" id="office"> <label for="office">Office</label>
-          </div>
-          <div class="form-group m-0"> <input type="checkbox" id="lighting"> <label for="lighting">Lighting</label> </div>
         </form>
       </div>
     </div>
     <div class="single-sidebar-box mt-30 wow fadeInUp animated">
       <h4>Color Option </h4>
       <ul class="color-option">
-        <li> <a href="#0" class="color-option-single"> <span> Black</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg2"> <span> Yellow</span> </a>
-        </li>
-        <li> <a href="#0" class="color-option-single bg3"> <span> Red</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg4"> <span> Blue</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg5"> <span> Green</span> </a>
-        </li>
-        <li> <a href="#0" class="color-option-single bg6"> <span> Olive</span> </a>
-        </li>
-        <li> <a href="#0" class="color-option-single bg7"> <span> Lime</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg8"> <span> Pink</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg9"> <span> Cyan</span> </a> </li>
-        <li> <a href="#0" class="color-option-single bg10"> <span> Magenta</span> </a>
-        </li>
+        <li v-for="color in colors" :key="color.id"> <a href="#0" :style="{ 'background-color': color.title }"
+            class="color-option-single">
+            <span> {{ color.title }}</span> </a> </li>
       </ul>
     </div>
     <div class="single-sidebar-box mt-30 wow fadeInUp animated">
       <h4>Filter By Price</h4>
       <div class="slider-box">
         <div id="price-range" class="slider"></div>
-        <div class="output-price"> <label for="priceRange">Price:</label> <input type="text" id="priceRange" readonly>
-        </div> <button class="filterbtn" type="submit"> Filter </button>
+        <div class="output-price"> <label for="priceRange">Price:</label> <input type="numeric" id="priceRange" readonly>
+        </div>
+        <button @click="$emit('clickPriceFilter', true)" class="filterbtn" type="submit"> Filter </button>
       </div>
     </div>
     <div class="single-sidebar-box mt-30 wow fadeInUp animated pb-0 border-bottom-0 ">
       <h4>Tags </h4>
       <ul class="popular-tag">
-        <li><a href="#0">Tools</a></li>
-        <li><a href="#0">Store</a></li>
-        <li><a href="#0">Decoration</a></li>
-        <li><a href="#0">Online</a></li>
-        <li><a href="#0">Furnitures</a></li>
-        <li><a href="#0">Beauty</a></li>
-        <li><a href="#0">Fashion</a></li>
-        <li><a href="#0">Office</a></li>
-        <li><a href="#0">Clothing</a></li>
-        <li><a href="#0">Interior</a></li>
-        <li><a href="#0">Good</a></li>
-        <li><a href="#0">Standard</a></li>
-        <li><a href="#0">Chair’s</a></li>
-        <li><a href="#0">Living Room</a></li>
+        <li v-for="tag in tags" :key="tag.id"><a @click.prevent="clickTag(tag.id)" href="#0">{{ tag.title }}</a></li>
       </ul>
     </div>
   </div>
@@ -73,7 +44,54 @@
 
 <script>
 export default {
-
+  data: () => ({
+    tags: [],
+    categories: [],
+    colors: [],
+    checkedCategories: []
+  }),
+  props: {
+    prices: {
+      type: Array,
+      default: []
+    }
+  },
+  mounted() {
+    this.getTags()
+    this.getCategories()
+    this.getColors()
+  },
+  methods: {
+    getTags() {
+      this.axios.get(`${this.apiUrl}/api/tags`)
+        .then(res => {
+          this.tags = res.data.data
+        })
+    },
+    getCategories() {
+      this.axios.get(`${this.apiUrl}/api/categories`)
+        .then(res => {
+          this.categories = res.data.data
+        })
+    },
+    getColors() {
+      this.axios.get(`${this.apiUrl}/api/colors`)
+        .then(res => {
+          this.colors = res.data.data
+        })
+        .catch(err => console.log(err))
+    },
+    clickTag(id) {
+      console.log(id);
+    },
+    clickCategory(id) {
+      if (this.checkedCategories.includes(id)) {
+        this.checkedCategories = this.checkedCategories.filter(catId => catId !== id)
+      } else {
+        this.checkedCategories.push(id)
+      }
+    }
+  }
 }
 </script>
 
