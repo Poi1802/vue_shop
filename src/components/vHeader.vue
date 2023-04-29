@@ -129,10 +129,10 @@
 														</router-link>
 													</li>
 													<li class="cartm">
-														<a href="#0" class="number cart-icon">
+														<router-link :to="{ name: 'cart' }" class="number cart-icon">
 															<i class="flaticon-shopping-cart"></i
 															><span class="count">(5)</span>
-														</a>
+														</router-link>
 													</li>
 												</ul>
 											</div>

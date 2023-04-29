@@ -15,13 +15,21 @@
 				<div class="products-grid-one__badge-box">
 					<span class="bg_base badge new">New</span>
 				</div>
-				<a href="cart.html" class="addcart btn--primary style2"> В корзину </a>
+				<a
+					@click.prevent="cartStore.addProduct(product)"
+					href="cart.html"
+					class="addcart btn--primary style2"
+					:class="{ activeCart: isInCart }">
+					<template v-if="!isInCart">В корзину</template>
+					<template v-else>Из корзины</template>
+				</a>
 				<div class="products-grid__usefull-links">
 					<ul>
 						<li>
 							<a
 								@click.prevent="wishStore.addWish(product)"
 								href="#"
+								class="wishIcon"
 								:class="{
 									activeWish: wishStore.wishes.some(({ id }) => id === product.id),
 								}">
@@ -118,7 +126,13 @@
 												<i class="flaticon-plus"></i>
 											</span>
 										</div>
-										<button class="btn--primary">В корзину</button>
+										<button
+											@click.prevent="cartStore.addProduct(product)"
+											class="btn--primary"
+											:class="{ activeCartBtn: isInCart }">
+											<template v-if="!isInCart">В корзину</template>
+											<template v-else>Из корзины</template>
+										</button>
 									</div>
 								</div>
 								<div class="payment-method">
@@ -152,6 +166,7 @@
 </template>
 
 <script>
+import { useCartStore } from '../../stores/cart';
 import { useWishListStore } from '../../stores/wishList';
 
 export default {
@@ -165,7 +180,13 @@ export default {
 		qty: 1,
 		selectedColor: null,
 		wishStore: useWishListStore(),
+		cartStore: useCartStore(),
 	}),
+	computed: {
+		isInCart() {
+			return this.cartStore.products.some(({ id }) => id === this.product.id);
+		},
+	},
 	methods: {
 		addQty() {
 			if (this.qty === this.product.count) {
@@ -188,9 +209,21 @@ export default {
 <style lang="sass" scoped>
 .activeCart
   background-color: #f39c66
+  transform: scale(1.1)
+
+.activeCartBtn
+  background-color: #f39c66
+  border-color: #f39c66
+  color: white
+  transform: scale(1.1)
+
+.wishIcon
+  &:active
+    transform: scale(1.1)
 
 .activeWish
   background-color: #f39c66
+  transform: scale(1.1)
   i
     color: white
 
