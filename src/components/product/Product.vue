@@ -1,5 +1,5 @@
 <template>
-	<div class="col-xl-4 col-lg-6 col-6">
+	<div class="col-xl-4 col-lg-6 col-6 wow fadeInUp animated">
 		<div class="products-three-single w-100 mt-30">
 			<div class="products-three-single-img">
 				<a href="shop-details-3.html" class="d-block">
@@ -88,21 +88,30 @@
 									<h2>{{ product.price }} ₽</h2>
 								</div>
 								<div class="color-varient">
-									<a href="#0" class="color-name pink"> <span>Pink</span> </a>
-									<a href="#0" class="color-name red"> <span>Red</span> </a>
-									<a href="#0" class="color-name yellow"><span>Yellow</span> </a>
-									<a href="#0" class="color-name blue">
-										<span>Blue</span>
+									<a
+										v-for="color in product.colors"
+										href="#0"
+										@click.prevent="selectedColor = color.id"
+										:style="{ 'background-color': color.title }"
+										class="color-name"
+										:class="{ activeColor: selectedColor == color.id }">
+										<span>{{ color.title }}</span>
 									</a>
-									<a href="#0" class="color-name black"> <span>Black</span> </a>
+								</div>
+								<div class="count">
+									<h6>Всего: {{ product.count }}</h6>
 								</div>
 								<div class="add-product">
-									<h6>Qty:</h6>
+									<h6>Кол-во:</h6>
 									<div class="button-group">
 										<div class="qtySelector text-center">
-											<span class="decreaseQty"><i class="flaticon-minus"></i> </span>
-											<input type="number" class="qtyValue" value="1" />
-											<span class="increaseQty"> <i class="flaticon-plus"></i> </span>
+											<span @click="reduceQty" class="decreaseQty">
+												<i class="flaticon-minus"></i>
+											</span>
+											<input type="text" class="qtyValue" :value="qty" />
+											<span @click="addQty" class="increaseQty">
+												<i class="flaticon-plus"></i>
+											</span>
 										</div>
 										<button class="btn--primary">Add to Cart</button>
 									</div>
@@ -145,6 +154,26 @@ export default {
 			default: {},
 		},
 	},
+	data: () => ({
+		qty: 1,
+		selectedColor: null,
+	}),
+	methods: {
+		addQty() {
+			if (this.qty === this.product.count) {
+				return;
+			}
+
+			this.qty++;
+		},
+		reduceQty() {
+			if (this.qty === 1) {
+				return;
+			}
+
+			this.qty--;
+		},
+	},
 };
 </script>
 
@@ -156,4 +185,17 @@ export default {
   background-color: #f39c66
   i
     color: white
+
+.qtySelector
+  span
+    cursor: pointer
+
+.activeColor
+  transform: scale(1.1)
+  box-shadow: 0.2em 0.2em 0.1em 0 rgba(15, 28, 63, 0.275)
+
+.count
+  h6
+    text-transform: uppercase
+    font-weight: 600
 </style>

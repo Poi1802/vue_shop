@@ -20,6 +20,7 @@
 								@clickCategoryFilter="clickCategoryFilter"
 								@clickColorFilter="clickColorFilter"
 								@clickTagFilter="clickTagFilter"
+								v-model="searched"
 								:prices="productsPrice" />
 						</div>
 					</div>
@@ -95,6 +96,7 @@ export default {
 		checkedCategories: [],
 		checkedTags: [],
 		checkedColors: [],
+		searched: '',
 	}),
 	components: {
 		BreadCrumb,
@@ -111,31 +113,34 @@ export default {
 			this.renderProducts = this.products;
 
 			if (this.priceRange) {
-				this.renderProducts = this.products;
 				this.renderProducts = this.renderProducts.filter(
 					({ price }) => price >= this.priceRange[0] && price <= this.priceRange[1]
 				);
 			}
 
 			if (this.checkedCategories.length > 0) {
-				this.renderProducts = this.products;
 				this.renderProducts = this.renderProducts.filter(({ category }) =>
 					this.checkedCategories.includes(category.id)
 				);
 			}
 
 			if (this.checkedColors.length > 0) {
-				this.renderProducts = this.products;
 				this.renderProducts = this.renderProducts.filter(({ colors }) =>
 					colors.some((color) => this.checkedColors.includes(color.id))
 				);
 			}
 
 			if (this.checkedTags.length > 0) {
-				this.renderProducts = this.products;
 				this.renderProducts = this.renderProducts.filter(({ tags }) =>
 					tags.some((tag) => this.checkedTags.includes(tag.id))
 				);
+			}
+
+			if (this.searched !== '') {
+				this.renderProducts = this.renderProducts.filter(({ title }) =>
+					title.toLocaleLowerCase().includes(this.searched.toLocaleLowerCase())
+				);
+				console.log(this.renderProducts);
 			}
 
 			return this.renderProducts.slice(start, end);
@@ -156,7 +161,7 @@ export default {
 				.then((res) => {
 					this.products = res.data.data;
 					this.initPriceRange();
-					console.log(this.products);
+					$(document).trigger('change');
 				})
 				.catch((err) => console.log(err))
 				.finally(() => {
@@ -167,7 +172,6 @@ export default {
 
 		changePage(page) {
 			this.page = page;
-			console.log(this.page);
 		},
 
 		initPriceRange() {
@@ -207,6 +211,7 @@ export default {
 	watch: {
 		renderProducts() {
 			this.maxPage = Math.ceil(this.renderProducts.length / 12);
+			$(document).trigger('change');
 		},
 	},
 };

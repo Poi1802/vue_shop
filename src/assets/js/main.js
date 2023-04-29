@@ -28,6 +28,10 @@ jQuery(function ($) {
     });
     selector.click();
 
+    setTimeout(() => {
+      $('.search-field').focus()
+    }, 300);
+
     /****======  Active class add Remove  ======*******/
     $(".menubar").on("click", function () {
       $(".mobile-menu__sidebar-menu ").addClass("active");
@@ -862,37 +866,37 @@ jQuery(function ($) {
 
 
     /****======  Increase and decrease number by click  ======*******/
-    if ($(".increaseQty").length) {
-      var minVal = 1,
-        maxVal = 20;
-      $(".increaseQty").on("click", function () {
-        var $parentElm = $(this).parents(".qtySelector");
-        $(this).addClass("clicked");
-        setTimeout(function () {
-          $(".clicked").removeClass("clicked");
-        }, 100);
-        var value = $parentElm.find(".qtyValue").val();
-        if (value < maxVal) {
-          value++;
-        }
-        $parentElm.find(".qtyValue").val(value);
-      });
-    };
+    // if ($(".increaseQty").length) {
+    //   var minVal = 1,
+    //     maxVal = 20;
+    //   $(".increaseQty").on("click", function () {
+    //     var $parentElm = $(this).parents(".qtySelector");
+    //     $(this).addClass("clicked");
+    //     setTimeout(function () {
+    //       $(".clicked").removeClass("clicked");
+    //     }, 100);
+    //     var value = $parentElm.find(".qtyValue").val();
+    //     if (value < maxVal) {
+    //       value++;
+    //     }
+    //     $parentElm.find(".qtyValue").val(value);
+    //   });
+    // };
 
-    if ($(".decreaseQty").length) {
-      $(".decreaseQty").on("click", function () {
-        var $parentElm = $(this).parents(".qtySelector");
-        $(this).addClass("clicked");
-        setTimeout(function () {
-          $(".clicked").removeClass("clicked");
-        }, 100);
-        var value = $parentElm.find(".qtyValue").val();
-        if (value > 1) {
-          value--;
-        }
-        $parentElm.find(".qtyValue").val(value);
-      });
-    };
+    // if ($(".decreaseQty").length) {
+    //   $(".decreaseQty").on("click", function () {
+    //     var $parentElm = $(this).parents(".qtySelector");
+    //     $(this).addClass("clicked");
+    //     setTimeout(function () {
+    //       $(".clicked").removeClass("clicked");
+    //     }, 100);
+    //     var value = $parentElm.find(".qtyValue").val();
+    //     if (value > 1) {
+    //       value--;
+    //     }
+    //     $parentElm.find(".qtyValue").val(value);
+    //   });
+    // };
 
 
     /****====== banner-one TweenMax Js  ======*******/
@@ -963,18 +967,18 @@ jQuery(function ($) {
     };
 
     //  Price Filter 
-    if ($("#price-range").length) {
-      // $("#price-range").slider({
-      //   range: true,
-      //   min: 0,
-      //   max: 20000,
-      //   values: [0, 20000],
-      //   slide: function (event, ui) {
-      //     $("#priceRange").val("$" + ui.values[0] + " - $" + ui.values[1]);
-      //   }
-      // });
-      // $("#priceRange").val("$" + $("#price-range").slider("values", 0) + " - $" + $("#price-range").slider("values", 1));
-    };
+    // if ($("#price-range").length) {
+    // $("#price-range").slider({
+    //   range: true,
+    //   min: 0,
+    //   max: 20000,
+    //   values: [0, 20000],
+    //   slide: function (event, ui) {
+    //     $("#priceRange").val("$" + ui.values[0] + " - $" + ui.values[1]);
+    //   }
+    // });
+    // $("#priceRange").val("$" + $("#price-range").slider("values", 0) + " - $" + $("#price-range").slider("values", 1));
+    // };
 
 
     /****======  Bottom to Top Scroll Js  ======*******/

@@ -1,11 +1,17 @@
 <template>
 	<div class="sidebar-holder">
-		<form action="#0" class="footer-default__subscrib-form m-0 p-0 wow fadeInUp animated">
-			<div class="footer-input-box p-0">
-				<input type="email" placeholder="Найти товар" name="email" />
-				<div class="subscribe_btn">
+		<form
+			@submit.prevent="clickSearchBtn"
+			class="footer-default__subscrib-form m-0 p-0 wow fadeInUp animated">
+			<div class="footer-input-box p-0 wow fadeInUp animated">
+				<input
+					ref="searchField"
+					class="search-field"
+					type="text"
+					placeholder="Найти товар" />
+				<button type="submit" class="subscribe_btn">
 					<i class="flaticon-magnifying-glass"></i>
-				</div>
+				</button>
 			</div>
 		</form>
 		<div class="single-sidebar-box mt-30 wow fadeInUp animated">
@@ -69,6 +75,8 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
 	data: () => ({
 		tags: [],
@@ -83,11 +91,17 @@ export default {
 			type: Array,
 			default: [],
 		},
+		modelValue: {
+			type: String,
+			default: '',
+		},
 	},
 	mounted() {
 		this.getTags();
 		this.getCategories();
 		this.getColors();
+
+		// this.$refs.searchField.focus();
 	},
 	methods: {
 		getTags() {
@@ -134,6 +148,9 @@ export default {
 			}
 
 			this.$emit('clickColorFilter', this.checkedColors);
+		},
+		clickSearchBtn() {
+			this.$emit('update:modelValue', this.$refs.searchField.value);
 		},
 	},
 };
