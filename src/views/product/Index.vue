@@ -11,8 +11,10 @@
 			<div class="container">
 				<div class="row gx-4">
 					<div class="col-xl-3 col-lg-4">
-						<div class="shop-grid-sidebar">
-							<button class="remove-sidebar d-lg-none d-block">
+						<div ref="mobileSidebar" class="shop-grid-sidebar">
+							<button
+								@click.prevent="toggleMobileSidebar"
+								class="remove-sidebar d-lg-none d-block">
 								<i class="flaticon-cross"> </i>
 							</button>
 							<Sidebar
@@ -168,6 +170,15 @@ export default {
 					$(document).trigger('change');
 					this.isLoading = false;
 				});
+		},
+
+		toggleMobileSidebar() {
+			if (this.$refs.mobileSidebar.className === 'shop-grid-sidebar') {
+				this.$refs.mobileSidebar.className =
+					this.$refs.mobileSidebar.className + ' active';
+			} else {
+				this.$refs.mobileSidebar.className = 'shop-grid-sidebar';
+			}
 		},
 
 		changePage(page) {

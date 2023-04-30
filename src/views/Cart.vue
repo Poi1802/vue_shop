@@ -49,21 +49,25 @@
 															alt="" />
 													</a>
 													<a href="shop-details-1.html" class="title">
-														<h5>Leather Bag</h5>
+														<h5>{{ giveTitle(product.title) }}</h5>
 													</a>
 												</div>
 											</td>
-											<td>$250.00</td>
+											<td>{{ product.price }} ₽</td>
 											<td class="qty">
 												<div class="qtySelector text-center">
 													<span class="decreaseQty"><i class="flaticon-minus"></i> </span>
-													<input type="number" class="qtyValue" value="1" />
+													<input type="text" class="qtyValue" :value="product.qty" />
 													<span class="increaseQty"> <i class="flaticon-plus"></i> </span>
 												</div>
 											</td>
-											<td class="sub-total">$500.00</td>
+											<td class="sub-total">{{ product.price * product.qty }} ₽</td>
 											<td>
-												<div class="remove"><i class="flaticon-cross"></i></div>
+												<div
+													@click.prevent="cartStore.deleteProduct(product.id)"
+													class="remove">
+													<i class="flaticon-cross"></i>
+												</div>
 											</td>
 										</tr>
 									</tbody>
@@ -200,7 +204,25 @@ export default {
 	data: () => ({
 		cartStore: useCartStore(),
 	}),
+	mounted() {
+		// console.log(this.cartStore.products);
+	},
+	methods: {
+		giveTitle(title) {
+			if (title.length > 25) {
+				return title.slice(0, 25) + '...';
+			}
+
+			return title;
+		},
+	},
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.remove
+  transition: all 0.3s ease-in-out
+
+  &:hover
+    color: red
+</style>

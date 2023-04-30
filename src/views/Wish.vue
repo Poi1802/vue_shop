@@ -91,7 +91,9 @@ export default {
 	data: () => ({
 		wishStore: useWishListStore(),
 	}),
-	mounted() {},
+	mounted() {
+		// console.log(this.wishStore.wishes);
+	},
 	methods: {
 		giveTitle(title) {
 			if (title.length > 25) {

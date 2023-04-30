@@ -16,9 +16,22 @@
 											<img src="src/assets/images/logo/logo.png" alt="" />
 										</a>
 										<div class="cart-holder">
-											<a href="#0" class="cart cart-icon position-relative">
+											<router-link
+												:to="{ name: 'cart' }"
+												class="cart cart-icon position-relative">
 												<i class="flaticon-shopping-cart"></i>
-											</a>
+												<span v-if="cartStore.products[0]" class="count"
+													>({{ cartStore.products.length }})</span
+												>
+											</router-link>
+											<router-link
+												:to="{ name: 'wish' }"
+												class="cart cart-icon wish-icon-mob position-relative">
+												<i class="flaticon-heart"></i>
+												<span v-if="cartStore.products[0]" class="count"
+													>({{ cartStore.products.length }})</span
+												>
+											</router-link>
 										</div>
 									</div>
 								</div>
@@ -130,8 +143,10 @@
 													</li>
 													<li class="cartm">
 														<router-link :to="{ name: 'cart' }" class="number cart-icon">
-															<i class="flaticon-shopping-cart"></i
-															><span class="count">(5)</span>
+															<i class="flaticon-shopping-cart"></i>
+															<span v-if="cartStore.products[0]" class="count"
+																>({{ cartStore.products.length }})</span
+															>
 														</router-link>
 													</li>
 												</ul>
@@ -158,9 +173,18 @@
 									<img src="src/assets/images/logo/logo.png" alt="" />
 								</a>
 								<div class="cart-holder">
-									<a href="#0" class="cart cart-icon position-relative">
+									<router-link
+										:to="{ name: 'cart' }"
+										class="cart cart-icon position-relative">
 										<i class="flaticon-shopping-cart"></i>
-									</a>
+									</router-link>
+								</div>
+								<div class="cart-holder">
+									<router-link
+										:to="{ name: 'wish' }"
+										class="cart cart-icon position-relative">
+										<i class="flaticon-heart"></i>
+									</router-link>
 								</div>
 							</div>
 						</div>
@@ -179,7 +203,7 @@
 									<ul
 										class="page-dropdown-menu d-flex align-items-center justify-content-center">
 										<li class="dropdown-list">
-											<a href="/"> <span>Home</span> </a>
+											<a href="/"> <span>Home1</span> </a>
 										</li>
 										<li class="dropdown-list">
 											<router-link :to="{ name: 'product.index' }">
@@ -188,6 +212,27 @@
 										</li>
 										<li class="dropdown-list">
 											<router-link :to="{ name: 'about' }">О нас</router-link>
+										</li>
+									</ul>
+									<ul class="main-menu__widge-box d-flex align-items-center">
+										<li class="d-lg-block d-none">
+											<a href="my-account.html"><i class="flaticon-user"></i> </a>
+										</li>
+										<li class="d-lg-block d-none">
+											<router-link :to="{ name: 'wish' }" class="number"
+												><i class="flaticon-heart"></i>
+												<span v-if="wishStore.wishes[0]" class="count"
+													>({{ wishStore.wishes.length }})</span
+												>
+											</router-link>
+										</li>
+										<li class="cartm">
+											<router-link :to="{ name: 'cart' }" class="number cart-icon">
+												<i class="flaticon-shopping-cart"></i>
+												<span v-if="cartStore.products[0]" class="count"
+													>({{ cartStore.products.length }})</span
+												>
+											</router-link>
 										</li>
 									</ul>
 								</nav>
@@ -285,13 +330,22 @@
 </template>
 
 <script>
+import { useCartStore } from '../stores/cart';
 import { useWishListStore } from '../stores/wishList';
 
 export default {
 	data: () => ({
 		wishStore: useWishListStore(),
+		cartStore: useCartStore(),
 	}),
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.main-menu__widge-box
+  margin-bottom: 10px
+  margin-left: 22px
+
+.wish-icon-mob
+  margin-left: 10px
+</style>
