@@ -159,7 +159,7 @@ export default {
 		getProducts() {
 			this.isLoading = true;
 			this.axios
-				.get(`${this.apiUrl}/api/products`)
+				.get(`${this.API_URL}/api/products`)
 				.then((res) => {
 					this.products = res.data.data;
 					this.initPriceRange();

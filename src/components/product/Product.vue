@@ -166,6 +166,7 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import { useCartStore } from '../../stores/cart';
 import { useWishListStore } from '../../stores/wishList';
 
@@ -184,7 +185,9 @@ export default {
 	}),
 	computed: {
 		isInCart() {
-			return this.cartStore.products.some(({ id }) => id === this.product.id);
+			if (this.cartStore.products[0]) {
+				return this.cartStore.products.some(({ id }) => id === this.product.id);
+			}
 		},
 	},
 	methods: {

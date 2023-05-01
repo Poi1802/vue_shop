@@ -2,8 +2,11 @@
 	<div class="sidebar-holder">
 		<form
 			@submit.prevent="clickSearchBtn"
-			class="footer-default__subscrib-form m-0 p-0 wow fadeInUp animated">
-			<div class="footer-input-box p-0 wow fadeInUp animated">
+			class="footer-default__subscrib-form m-0 p-0"
+			:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
+			<div
+				class="footer-input-box p-0"
+				:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
 				<input
 					ref="searchField"
 					class="search-field"
@@ -14,7 +17,9 @@
 				</button>
 			</div>
 		</form>
-		<div class="single-sidebar-box mt-30 wow fadeInUp animated">
+		<div
+			class="single-sidebar-box mt-30"
+			:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
 			<h4>Выберите категории</h4>
 			<div class="checkbox-item">
 				<form>
@@ -29,7 +34,9 @@
 				</form>
 			</div>
 		</div>
-		<div class="single-sidebar-box mt-30 wow fadeInUp animated">
+		<div
+			class="single-sidebar-box mt-30"
+			:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
 			<h4>Выберите цвета</h4>
 			<ul class="color-option">
 				<li v-for="color in colors" :key="color.id">
@@ -45,7 +52,9 @@
 				</li>
 			</ul>
 		</div>
-		<div class="single-sidebar-box mt-30 wow fadeInUp animated">
+		<div
+			class="single-sidebar-box mt-30"
+			:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
 			<h4>Фильтр по цене</h4>
 			<div class="slider-box">
 				<div id="price-range" class="slider"></div>
@@ -58,7 +67,9 @@
 				</button>
 			</div>
 		</div>
-		<div class="single-sidebar-box mt-30 wow fadeInUp animated pb-0 border-bottom-0">
+		<div
+			class="single-sidebar-box mt-30 pb-0 border-bottom-0"
+			:class="{ 'wow fadeInUp animated': screenWidth > 989 }">
 			<h4>Выберите теги</h4>
 			<ul class="popular-tag">
 				<li v-for="tag in tags" :key="tag.id">
@@ -85,6 +96,7 @@ export default {
 		checkedCategories: [],
 		checkedTags: [],
 		checkedColors: [],
+		screenWidth: null,
 	}),
 	props: {
 		prices: {
@@ -100,23 +112,22 @@ export default {
 		this.getTags();
 		this.getCategories();
 		this.getColors();
-
-		// this.$refs.searchField.focus();
+		this.screenWidth = window.innerWidth;
 	},
 	methods: {
 		getTags() {
-			this.axios.get(`${this.apiUrl}/api/tags`).then((res) => {
+			this.axios.get(`${this.API_URL}/api/tags`).then((res) => {
 				this.tags = res.data.data;
 			});
 		},
 		getCategories() {
-			this.axios.get(`${this.apiUrl}/api/categories`).then((res) => {
+			this.axios.get(`${this.API_URL}/api/categories`).then((res) => {
 				this.categories = res.data.data;
 			});
 		},
 		getColors() {
 			this.axios
-				.get(`${this.apiUrl}/api/colors`)
+				.get(`${this.API_URL}/api/colors`)
 				.then((res) => {
 					this.colors = res.data.data;
 				})

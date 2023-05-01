@@ -29,49 +29,7 @@
 					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 						<div class="cart-table-box">
 							<div class="table-outer">
-								<table class="cart-table">
-									<thead class="cart-header">
-										<tr>
-											<th class="">Product Name</th>
-											<th class="price">Price</th>
-											<th>Quantity</th>
-											<th>Subtotal</th>
-											<th class="hide-me"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="product in cartStore.products">
-											<td>
-												<div class="thumb-box">
-													<a href="shop-details-1.html" class="thumb">
-														<img
-															src="src/assets/images/shop/cart-product-thumb-1.jpg"
-															alt="" />
-													</a>
-													<a href="shop-details-1.html" class="title">
-														<h5>{{ giveTitle(product.title) }}</h5>
-													</a>
-												</div>
-											</td>
-											<td>{{ product.price }} ₽</td>
-											<td class="qty">
-												<div class="qtySelector text-center">
-													<span class="decreaseQty"><i class="flaticon-minus"></i> </span>
-													<input type="text" class="qtyValue" :value="product.qty" />
-													<span class="increaseQty"> <i class="flaticon-plus"></i> </span>
-												</div>
-											</td>
-											<td class="sub-total">{{ product.price * product.qty }} ₽</td>
-											<td>
-												<div
-													@click.prevent="cartStore.deleteProduct(product.id)"
-													class="remove">
-													<i class="flaticon-cross"></i>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+								<CartTable />
 							</div>
 						</div>
 					</div>
@@ -95,7 +53,9 @@
 								<button class="btn--primary mt-30" type="submit">
 									Continue Shopping
 								</button>
-								<button class="btn--primary mt-30" type="submit">Update Cart</button>
+								<button @click="updateCart" class="btn--primary mt-30" type="submit">
+									Update Cart
+								</button>
 							</div>
 						</div>
 					</div>
@@ -198,15 +158,14 @@
 </template>
 
 <script>
-import { useCartStore } from '../stores/cart';
+import CartTable from '../components/cart/CartTable.vue';
 
 export default {
-	data: () => ({
-		cartStore: useCartStore(),
-	}),
-	mounted() {
-		// console.log(this.cartStore.products);
+	data: () => ({}),
+	components: {
+		CartTable,
 	},
+
 	methods: {
 		giveTitle(title) {
 			if (title.length > 25) {
@@ -214,6 +173,29 @@ export default {
 			}
 
 			return title;
+		},
+		addToCart() {
+			const data = new FormData();
+			data.append('user_id', 1);
+			data.append(
+				'product_ids',
+				JSON.stringify(this.cartStore.products.map((product) => product.id))
+			);
+			data.append('paid', 0);
+
+			this.axios
+				.post(`${this.API_URL}/api/carts`, data)
+				.then((res) => console.log(res.data))
+				.catch((err) => console.log(err));
+		},
+
+		updateCart() {
+			const product_ids = this.cartStore.products.map((product) => product.id);
+			this.axios
+				.patch(`${this.API_URL}/api/carts/${1}`, {
+					product_ids: JSON.stringify(product_ids),
+				})
+				.then((res) => console.log(res.data));
 		},
 	},
 };

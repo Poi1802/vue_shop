@@ -20,16 +20,18 @@
 												:to="{ name: 'cart' }"
 												class="cart cart-icon position-relative">
 												<i class="flaticon-shopping-cart"></i>
-												<span v-if="cartStore.products[0]" class="count"
+												<span v-if="cartStore.products[0]"
 													>({{ cartStore.products.length }})</span
 												>
 											</router-link>
+										</div>
+										<div class="cart-holder">
 											<router-link
 												:to="{ name: 'wish' }"
-												class="cart cart-icon wish-icon-mob position-relative">
+												class="cart cart-icon position-relative">
 												<i class="flaticon-heart"></i>
-												<span v-if="cartStore.products[0]" class="count"
-													>({{ cartStore.products.length }})</span
+												<span v-if="wishStore.wishes[0]"
+													>({{ wishStore.wishes.length }})</span
 												>
 											</router-link>
 										</div>
@@ -61,11 +63,15 @@
 									<a href="/"> <span>Home</span> </a>
 								</li>
 								<li class="dropdown-list">
-									<a href="/products"> <span>Shop </span> </a>
+									<router-link :to="{ name: 'product.index' }">
+										<span>Shop </span>
+									</router-link>
 								</li>
-								<li class="dropdown-list"><a href="/about">О нас</a></li>
-								<li><a href="login.html">Login </a></li>
-								<li><a href="register.html">Register </a></li>
+								<li class="dropdown-list">
+									<router-link :to="{ name: 'about' }">О нас</router-link>
+								</li>
+								<li><RouterLink :to="{ name: 'login' }">Login </RouterLink></li>
+								<li><RouterLink :to="{ name: 'register' }">Register </RouterLink></li>
 							</ul>
 						</div>
 					</div>
@@ -101,7 +107,9 @@
 													<option value="4">FRENCH</option>
 												</select>
 											</div>
-											<a href="login.html"> Sign In / Register </a>
+											<router-link :to="{ name: 'login' }">
+												Sign In / Register
+											</router-link>
 										</div>
 									</div>
 								</div>
@@ -177,6 +185,9 @@
 										:to="{ name: 'cart' }"
 										class="cart cart-icon position-relative">
 										<i class="flaticon-shopping-cart"></i>
+										<span v-if="cartStore.products[0]"
+											>({{ cartStore.products.length }})</span
+										>
 									</router-link>
 								</div>
 								<div class="cart-holder">
@@ -184,6 +195,9 @@
 										:to="{ name: 'wish' }"
 										class="cart cart-icon position-relative">
 										<i class="flaticon-heart"></i>
+										<span v-if="wishStore.wishes[0]"
+											>({{ wishStore.wishes.length }})</span
+										>
 									</router-link>
 								</div>
 							</div>
@@ -330,6 +344,7 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import { useCartStore } from '../stores/cart';
 import { useWishListStore } from '../stores/wishList';
 
@@ -338,6 +353,9 @@ export default {
 		wishStore: useWishListStore(),
 		cartStore: useCartStore(),
 	}),
+	beforeMount() {
+		this.cartStore.fetchProducts(1);
+	},
 };
 </script>
 
