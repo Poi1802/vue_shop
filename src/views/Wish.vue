@@ -41,37 +41,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-for="product in wishStore.wishes">
-											<td>
-												<div class="wishlist-thumb">
-													<img
-														src="src/assets/images/shop/cart-product-thumb-1.jpg"
-														alt="" />
-												</div>
-											</td>
-											<td>
-												<h5>{{ giveTitle(product.title) }}</h5>
-											</td>
-											<td>
-												<p class="price">{{ product.price }} ₽</p>
-											</td>
-											<td v-if="product.published">
-												<p class="instock">Продается</p>
-											</td>
-											<td v-else>
-												<p class="instock unstock">Нет в наличии</p>
-											</td>
-											<td class="add-to-cart-btn">
-												<a href="cart.html" class="btn--primary style2">В корзину</a>
-											</td>
-											<td>
-												<div
-													@click.prevent="wishStore.deleteWish(product.id)"
-													class="remove">
-													<i class="flaticon-cross"></i>
-												</div>
-											</td>
-										</tr>
+										<WishRow v-for="product in wishStore.wishes" :product="product" />
 									</tbody>
 								</table>
 							</div>
@@ -86,14 +56,19 @@
 
 <script>
 import { useWishListStore } from '../stores/wishList';
+import WishRow from '../components/wish/WishRow.vue';
 
 export default {
 	data: () => ({
 		wishStore: useWishListStore(),
 	}),
-	mounted() {
-		// console.log(this.wishStore.wishes);
+	components: {
+		WishRow,
 	},
+	mounted() {
+		console.log(this.cartStore);
+	},
+
 	methods: {
 		giveTitle(title) {
 			if (title.length > 25) {
@@ -103,6 +78,7 @@ export default {
 			return title;
 		},
 	},
+	inject: ['cartStore'],
 };
 </script>
 
@@ -112,7 +88,4 @@ export default {
 
   &:hover
     color: red
-
-.unstock
-  background-color: #eb4f34 !important
 </style>

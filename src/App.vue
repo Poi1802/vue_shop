@@ -9,7 +9,7 @@
 
 		<VHeader />
 
-		<RouterView></RouterView>
+		<RouterView :key="$route.fullPath"></RouterView>
 
 		<vFooter></vFooter>
 	</div>
@@ -19,14 +19,24 @@
 import { RouterView } from 'vue-router';
 import Footer from './components/Footer.vue';
 import VHeader from './components/vHeader.vue';
+import { useUserStore } from './stores/user';
+import { useCartStore } from './stores/cart';
 
 export default {
 	data: () => ({
 		kek: 'sadfsaf',
+		userStore: useUserStore(),
 	}),
 	mounted() {
 		$(document).trigger('change');
+		this.userStore.getToken();
 	},
+	updated() {
+		this.userStore.getToken();
+	},
+	provide: () => ({
+		cartStore: useCartStore(),
+	}),
 	components: { vFooter: Footer, RouterView, VHeader },
 };
 </script>

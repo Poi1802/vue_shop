@@ -5,7 +5,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
-						<div class="breadcrumb-content text-center wow fadeInUp animated">
+						<div class="breadcrumb-content text-center">
 							<h2>Register</h2>
 							<div class="breadcrumb-menu">
 								<ul>
@@ -26,7 +26,7 @@
 		<section class="login-page pt-120 pb-120">
 			<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-xl-6 col-lg-8 col-md-9 wow fadeInUp animated">
+					<div class="col-xl-6 col-lg-8 col-md-9">
 						<div
 							class="login-register-form"
 							style="background-image: url('src/assets/images/inner-pages/login-bg.png')">
