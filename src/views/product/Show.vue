@@ -1260,8 +1260,26 @@
 
 <script>
 export default {
+	data: () => ({
+		product: {},
+		recentProducts: [],
+	}),
+
 	mounted() {
 		$(document).trigger('change');
+
+		this.getProduct();
+	},
+
+	methods: {
+		getProduct() {
+			this.axios
+				.get(`${this.API_URL}/api/products/${this.$route.params.id}`)
+				.then((res) => {
+					this.product = res.data.product;
+					this.recentProducts = res.data.recentProducts;
+				});
+		},
 	},
 };
 </script>
