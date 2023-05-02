@@ -3,7 +3,7 @@
 		<!--  Footer Three start -->
 		<footer class="footer-default footer-3">
 			<div class="footer-default__shap_1 position-absolute">
-				<img src="src/assets/images/shape/footer-shape-1.png" alt="" />
+				<img src="/src/assets/images/shape/footer-shape-1.png" alt="" />
 			</div>
 			<!--Start Footer-->
 			<div class="footer-default__main-footer position-relative">
@@ -121,16 +121,16 @@
 						</div>
 						<div class="footer-payment wow fadeInUp animated">
 							<a href="#0">
-								<img src="src/assets/images/home-four/method-1.jpg" alt="payment" />
+								<img src="/src/assets/images/home-four/method-1.jpg" alt="payment" />
 							</a>
 							<a href="#0">
-								<img src="src/assets/images/home-four/method-2.jpg" alt="payment" />
+								<img src="/src/assets/images/home-four/method-2.jpg" alt="payment" />
 							</a>
 							<a href="#0">
-								<img src="src/assets/images/home-four/method-3.jpg" alt="payment" />
+								<img src="/src/assets/images/home-four/method-3.jpg" alt="payment" />
 							</a>
 							<a href="#0">
-								<img src="src/assets/images/home-four/method-4.jpg" alt="payment" />
+								<img src="/src/assets/images/home-four/method-4.jpg" alt="payment" />
 							</a>
 						</div>
 					</div>

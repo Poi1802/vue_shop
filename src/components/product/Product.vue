@@ -2,7 +2,7 @@
 	<div class="col-xl-4 col-lg-6 col-6 wow fadeInUp animated">
 		<div class="products-three-single w-100 mt-30">
 			<div class="products-three-single-img">
-				<a href="shop-details-3.html" class="d-block">
+				<a :href="`/products/${product.id}`" class="d-block">
 					<img
 						src="src/assets/images/home-three/productss2-1.jpg"
 						class="first-img"
@@ -39,7 +39,7 @@
 						</li>
 						<li>
 							<a :href="`#popup${product.id}`" class="popup_link">
-								<i class="flaticon-visibility"></i>
+								<i lass="flaticon-visibility"></i>
 								<span>просмотреть</span>
 							</a>
 						</li>

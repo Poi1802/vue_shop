@@ -13,7 +13,7 @@
 										class="menu-info d-flex justify-content-between align-items-center">
 										<div class="menubar"><span></span> <span></span> <span></span></div>
 										<a href="/" class="logo">
-											<img src="src/assets/images/logo/logo.png" alt="" />
+											<img src="/src/assets/images/logo/logo.png" alt="" />
 										</a>
 										<div class="cart-holder">
 											<router-link
@@ -88,7 +88,7 @@
 						<div
 							class="col-lg-3 d-flex align-items-center justify-content-center border-rit">
 							<div class="logo">
-								<a href="/"> <img src="src/assets/images/logo/logo.png" alt="" /> </a>
+								<a href="/"> <img src="/src/assets/images/logo/logo.png" alt="" /> </a>
 							</div>
 						</div>
 						<div class="col-lg-9 g-0 p-0">
@@ -186,7 +186,7 @@
 							<div class="menu-info d-flex justify-content-between align-items-center">
 								<div class="menubar"><span></span> <span></span> <span></span></div>
 								<a href="/" class="logo">
-									<img src="src/assets/images/logo/logo.png" alt="" />
+									<img src="/src/assets/images/logo/logo.png" alt="" />
 								</a>
 								<div class="cart-holder">
 									<router-link
@@ -216,7 +216,7 @@
 			<div class="container position-relative d-lg-block d-none">
 				<div class="d-flex align-items-center justify-content-between">
 					<a href="/" class="logo me-2">
-						<img src="src/assets/images/logo/logo.png" alt="" />
+						<img src="/src/assets/images/logo/logo.png" alt="" />
 					</a>
 					<div class="mega-menu-default mega-menu d-lg-block d-none">
 						<div class="container">
@@ -299,4 +299,7 @@ export default {
 
 .wish-icon-mob
   margin-left: 10px
+
+header
+  border-bottom: 1px !important
 </style>
