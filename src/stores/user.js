@@ -23,5 +23,20 @@ export const useUserStore = defineStore('user', {
 				})
 				.catch((err) => console.log(err));
 		},
+
+		register(data) {
+			axios
+				.get(`${API_URL}/sanctum/csrf-cookie`)
+				.then((res) => {
+					axios
+						.post(`${API_URL}/register`, data)
+						.then((res) => {
+							console.log(res);
+							axios.get(`${API_URL}/api/user`).then((res) => (this.user = res.data));
+						})
+						.catch((err) => console.log(err));
+				})
+				.catch((err) => console.log(err));
+		},
 	},
 });

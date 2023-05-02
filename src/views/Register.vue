@@ -37,24 +37,43 @@
 									<router-link :to="{ name: 'login' }">Log in</router-link>
 								</p>
 							</div>
-							<form class="common-form">
+							<form @submit.prevent="userRegister" class="common-form">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Your Name" />
+									<input
+										v-model="name"
+										type="text"
+										class="form-control"
+										placeholder="Your Name" />
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Username" />
+									<input
+										v-model="lastName"
+										type="text"
+										class="form-control"
+										placeholder="Your Last name" />
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control" placeholder="Your Email" />
+									<input
+										v-model="email"
+										type="email"
+										class="form-control"
+										placeholder="Your Email" />
 								</div>
 								<div class="form-group eye">
-									<div class="icon icon-1"><i class="flaticon-hidden"></i></div>
 									<input
+										v-model="password"
 										type="password"
 										id="password-field"
 										class="form-control"
 										placeholder="Password" />
-									<div class="icon icon-2"><i class="flaticon-visibility"></i></div>
+								</div>
+								<div class="form-group eye">
+									<input
+										v-model="passwordConfirmation"
+										type="password"
+										id="password-field"
+										class="form-control"
+										placeholder="Password-confirmation" />
 								</div>
 								<div class="checkk">
 									<div class="form-check p-0 m-0">
@@ -76,7 +95,33 @@
 </template>
 
 <script>
-export default {};
+import { useUserStore } from '../stores/user';
+
+export default {
+	data: () => ({
+		name: '',
+		lastName: '',
+		email: '',
+		password: '',
+		passwordConfirmation: '',
+		userStore: useUserStore(),
+	}),
+
+	methods: {
+		userRegister() {
+			console.log(123);
+			const data = {
+				name: this.name,
+				last_name: this.lastName,
+				email: this.email,
+				password: this.password,
+				password_confirmation: this.passwordConfirmation,
+			};
+
+			this.userStore.register(data);
+		},
+	},
+};
 </script>
 
 <style lang="sass" scoped></style>

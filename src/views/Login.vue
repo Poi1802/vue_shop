@@ -90,16 +90,6 @@ export default {
 			};
 
 			this.userStore.login(data);
-
-			// this.axios
-			// 	.get(`${this.API_URL}/sanctum/csrf-cookie`)
-			// 	.then((res) => {
-			// 		this.axios
-			// 			.post(`${this.API_URL}/login`, data)
-			// 			.then((res) => console.log(res))
-			// 			.catch((err) => console.log(err));
-			// 	})
-			// 	.catch((err) => console.log(err));
 		},
 	},
 };
