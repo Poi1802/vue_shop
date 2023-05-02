@@ -166,6 +166,8 @@ export default {
 		CartTable,
 	},
 
+	mounted() {},
+
 	methods: {
 		giveTitle(title) {
 			if (title.length > 25) {

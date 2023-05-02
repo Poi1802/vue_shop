@@ -7,6 +7,10 @@ import axios from 'axios';
 
 const app = createApp(App);
 
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.withCredentials = true;
+
 app.config.globalProperties.axios = axios;
 app.config.globalProperties.API_URL = 'http://localhost:8888';
 

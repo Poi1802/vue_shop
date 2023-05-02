@@ -37,9 +37,10 @@
 									<router-link :to="{ name: 'register' }">Sign up for free</router-link>
 								</p>
 							</div>
-							<form class="common-form">
+							<form @submit.prevent="userLogin" class="common-form">
 								<div class="form-group">
 									<input
+										v-model="email"
 										type="text"
 										class="form-control"
 										placeholder="Your User Name (Or) Email Address" />
@@ -47,6 +48,7 @@
 								<div class="form-group eye">
 									<div class="icon icon-1"><i class="flaticon-hidden"></i></div>
 									<input
+										v-model="password"
 										type="password"
 										id="password-field"
 										class="form-control"
@@ -72,14 +74,32 @@
 </template>
 
 <script>
+import { useUserStore } from '../stores/user';
+
 export default {
 	data: () => ({
 		email: '',
 		password: '',
+		userStore: useUserStore(),
 	}),
 	methods: {
 		userLogin() {
-			this.axios(`${this.API_URL}/api/login`);
+			const data = {
+				email: this.email,
+				password: this.password,
+			};
+
+			this.userStore.login(data);
+
+			// this.axios
+			// 	.get(`${this.API_URL}/sanctum/csrf-cookie`)
+			// 	.then((res) => {
+			// 		this.axios
+			// 			.post(`${this.API_URL}/login`, data)
+			// 			.then((res) => console.log(res))
+			// 			.catch((err) => console.log(err));
+			// 	})
+			// 	.catch((err) => console.log(err));
 		},
 	},
 };
