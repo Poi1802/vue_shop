@@ -4,11 +4,11 @@
 			<div class="products-three-single-img">
 				<a :href="`/products/${product.id}`" class="d-block">
 					<img
-						src="src/assets/images/home-three/productss2-1.jpg"
+						src="/src/assets/images/home-three/productss2-1.jpg"
 						class="first-img"
 						alt="" />
 					<img
-						src="src/assets/images/home-three/productss2-hover-1.png"
+						src="/src/assets/images/home-three/productss2-hover-1.png"
 						alt=""
 						class="hover-img" />
 				</a>
@@ -56,17 +56,23 @@
 										<ul>
 											<li class="tab-nav popup-product-thumb">
 												<a href="#tabb1">
-													<img src="src/assets/images/shop/products-v6-img5.jpg" alt="" />
+													<img
+														src="/src/assets/images/shop/products-v6-img5.jpg"
+														alt="" />
 												</a>
 											</li>
 											<li class="tab-nav popup-product-thumb">
 												<a href="#tabb2">
-													<img src="src/assets/images/shop/products-v6-img6.jpg" alt="" />
+													<img
+														src="/src/assets/images/shop/products-v6-img6.jpg"
+														alt="" />
 												</a>
 											</li>
 											<li class="tab-nav popup-product-thumb">
 												<a href="#tabb3">
-													<img src="src/assets/images/shop/products-v6-img7.jpg" alt="" />
+													<img
+														src="/src/assets/images/shop/products-v6-img7.jpg"
+														alt="" />
 												</a>
 											</li>
 										</ul>
@@ -74,17 +80,17 @@
 									<div class="popup-product-main-image-box">
 										<div id="tabb1" class="tab-item popup-product-image">
 											<div class="popup-product-single-image">
-												<img src="src/assets/images/shop/products-v6-img5.jpg" alt="" />
+												<img src="/src/assets/images/shop/products-v6-img5.jpg" alt="" />
 											</div>
 										</div>
 										<div id="tabb2" class="tab-item popup-product-image">
 											<div class="popup-product-single-image">
-												<img src="src/assets/images/shop/products-v6-img6.jpg" alt="" />
+												<img src="/src/assets/images/shop/products-v6-img6.jpg" alt="" />
 											</div>
 										</div>
 										<div id="tabb3" class="tab-item popup-product-image">
 											<div class="popup-product-single-image">
-												<img src="src/assets/images/shop/products-v6-img7.jpg" alt="" />
+												<img src="/src/assets/images/shop/products-v6-img7.jpg" alt="" />
 											</div>
 										</div>
 										<button class="prev"><i class="flaticon-back"></i></button>
@@ -137,16 +143,16 @@
 								</div>
 								<div class="payment-method">
 									<a href="#0">
-										<img src="src/assets/images/payment_method/method_1.png" alt="" />
+										<img src="/src/assets/images/payment_method/method_1.png" alt="" />
 									</a>
 									<a href="#0">
-										<img src="src/assets/images/payment_method/method_2.png" alt="" />
+										<img src="/src/assets/images/payment_method/method_2.png" alt="" />
 									</a>
 									<a href="#0">
-										<img src="src/assets/images/payment_method/method_3.png" alt="" />
+										<img src="/src/assets/images/payment_method/method_3.png" alt="" />
 									</a>
 									<a href="#0">
-										<img src="src/assets/images/payment_method/method_4.png" alt="" />
+										<img src="/src/assets/images/payment_method/method_4.png" alt="" />
 									</a>
 								</div>
 							</div>
@@ -174,7 +180,6 @@ export default {
 	props: {
 		product: {
 			type: Object,
-			default: {},
 		},
 	},
 	data: () => ({

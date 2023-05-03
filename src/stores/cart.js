@@ -59,6 +59,13 @@ export const useCartStore = defineStore('cart', {
 			this.products = this.products.filter((product) => id != product.id);
 
 			localStorage.setItem('cart', JSON.stringify(this.products));
+
+			const product_ids = this.products.map((product) => product.id);
+			axios
+				.patch(`${API_URL}/api/carts/${this.cartId}`, {
+					product_ids: JSON.stringify(product_ids),
+				})
+				.then((res) => console.log(res.data));
 		},
 
 		fetchProducts(id) {
