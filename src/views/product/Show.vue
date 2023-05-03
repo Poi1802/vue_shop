@@ -55,9 +55,13 @@
 									<div class="product-quantity-box d-flex align-items-center flex-wrap">
 										<div class="qty mr-2">
 											<div class="qtySelector text-center">
-												<span class="decreaseQty"><i class="flaticon-minus"></i> </span>
-												<input type="text" class="qtyValue" value="1" />
-												<span class="increaseQty"> <i class="flaticon-plus"></i> </span>
+												<span @click="decreaseQty" class="decreaseQty"
+													><i class="flaticon-minus"></i>
+												</span>
+												<input type="text" class="qtyValue" :value="productQty" />
+												<span @click="increaseQty" class="increaseQty">
+													<i class="flaticon-plus"></i>
+												</span>
 											</div>
 										</div>
 										<div class="product-quantity-check">
@@ -223,6 +227,18 @@ export default {
 		trigger() {
 			$(document).trigger('change');
 			console.log(this.trigger);
+		},
+
+		increaseQty() {
+			if (this.productQty < this.product.count) {
+				this.productQty++;
+			}
+		},
+
+		decreaseQty() {
+			if (this.productQty > 1) {
+				this.productQty--;
+			}
 		},
 	},
 };
