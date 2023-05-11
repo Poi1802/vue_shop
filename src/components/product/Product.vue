@@ -39,7 +39,7 @@
 						</li>
 						<li>
 							<a :href="`#popup${product.id}`" class="popup_link">
-								<i lass="flaticon-visibility"></i>
+								<i class="flaticon-visibility"></i>
 								<span>просмотреть</span>
 							</a>
 						</li>

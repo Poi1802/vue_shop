@@ -36,19 +36,18 @@
 									</div>
 									<div
 										class="right-box justify-content-md-between justify-content-center wow fadeInUp animated">
-										<div class="short-by">
+										<!-- <div class="short-by">
 											<div class="select-box">
 												<select class="wide">
-													<option data-display="Последние">Последние</option>
-													<option value="1">Бестселлер</option>
-													<option value="2">По алфавиту, А-Я</option>
-													<option value="3">По алфавиту, Я-А</option>
+													<option value="0">Последние</option>
+													<option value="1">По алфавиту, А-Я</option>
+													<option value="2">По алфавиту, Я-А</option>
 													<option value="3">По цене, от низкой</option>
-													<option value="3">По цене, от выокой</option>
-													<option value="3">Старые</option>
+													<option value="4">По цене, от выокой</option>
+													<option value="5">Старые</option>
 												</select>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -99,6 +98,7 @@ export default {
 		checkedTags: [],
 		checkedColors: [],
 		searched: '',
+		selected: 0,
 	}),
 	components: {
 		BreadCrumb,
@@ -164,6 +164,7 @@ export default {
 					this.products = res.data.data;
 					this.initPriceRange();
 					$(document).trigger('change');
+					console.log(this.products);
 				})
 				.catch((err) => console.log(err))
 				.finally(() => {
